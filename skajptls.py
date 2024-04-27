@@ -49,7 +49,7 @@ def clear():os.system('cls' if os.name == 'nt' else 'clear')
 if os.name == 'posix':FNULL=open(os.devnull, 'w')
 
 # Import Modules Made By Skajp
-if os.path.exists("./misc"): from misc.modules import pscan, iplookup, mailscrape, obs, getip, OnlineChat, keylogger, anonftp, maclookup, hashes
+if os.path.exists("./misc"): from misc.modules import pscan, iplookup, mailscrape, obs, getip, OnlineChat, keylogger, anonftp, maclookup, hashes, changemac
 else:
     clear()
     print(f"\n{bad} Failed to locate './misc' folder")
@@ -227,15 +227,17 @@ def options_manual():
   values = [
     ["Port Scanner", "pscan", "Just basic prot scanner"],
     ["IP Look Up", "iplook", "Basic ip look up"],
-    ["Mac Look Up", "mac", "Basic mac address look up"],
+    ["Mac Look Up", "macl", "Basic mac address look up"],
     ["Your IPs", "myip", "Shows you your local and public ip"],
     ["Anonymous FTP", "aftp", "Tests anonymous login on FTP"],
     ["Mail scraper", "mailscrape", "Scrapes mails from websites"],
     ["Online Chat", "chat", "Creates chat where you can chat with friends"],
     ["Python Obfuscator", "pyobs", "Obfuscates python code"],
     ["Keylogger", "keylog", "Simple keylogger"],
+    ["Change Mac", "chmac", "Changes your mac address"],
     ["Webs", "webs", "Webs submenu"],
-    ["Hashing", "hash", "Hashing submenu"]
+    ["Hashing", "hash", "Hashing submenu"],
+    ["Mac submenu", "mac", "Changing mac address"]
   ]
   PrintTable(True,values,True)
 
@@ -292,7 +294,9 @@ def webs_manual():
     ["Crack Station",          "crack",         "Database of hashes"],
     ["Faceidcheck",            "facecheck",     "Analyzes faces"],
     ["Payload All Things",     "pat",           "Lot of payloads"],
-    ["Check-host",             "checkh",        "IP resolver"]
+    ["Check-host",             "checkh",        "IP resolver"],
+    ["Censys",                 "censys",        "Find devices across the web"],
+    ["Phantom Mail",           "pmail",         "Temporary mail"]
   ]
   PrintTable(True,values,True)
 
@@ -327,8 +331,31 @@ def hashing_submenu_manual():
     ["sha512",  "sha512", "Creates sha512 hash"]
   ]
   PrintTable(True,values,True)
+
+def mac_manual():
+  values = [
+    ["Random Mac", "random", "Changes your mac"],
+    ["Reset Mac", "reset", "Resets your mac"]
+  ]
+  PrintTable(True,values,True)
  ##########################################################################
 
+def ChangeMacSubmenu():
+  while True:
+    cho = input(f"\n \033[1m\033[4;37mskajptls{white} (\033[1;38;2;200;127;0mMac\033[0;37m) \033[1;31mNT {grey}> {white}").lower() if os.name == 'nt' else input(f"\n \033[1m\033[4;37mskajptls{white} (\033[1;38;2;200;127;0mMac\033[0;37m) {grey}> {white}").lower() 
+    try: fullcho = cho; cho = cho.split()[0]
+    except: pass
+    # Misc Options
+    if cho in ['clear', 'cls']: clear()
+    elif cho in ['exit', 'quit', 'q']: quit()
+    elif cho in ['back']: main()
+    elif cho in ['help', '?', '??']: helpsub_manual()
+    elif cho in ['opt', 'options']: mac_manual()
+    elif cho in ["exec", "e"]: os.system(fullcho[5:]) if cho == "exec" else os.system(fullcho[2:])
+    # Commands
+    elif cho in ['random', '0']: changemac.main()
+    elif cho in ['reset','1']: changemac.reset()
+    else:print(f"\n{bad} Command not found")
 
 def get_misc_size():
     total_size = 0
@@ -503,10 +530,11 @@ def webs_submenu():
         elif cho in ["facecheck","49"]: webbrowser.open("https://facecheck.id/"); print('\033[1;32m' + "\n Openning browser...") if tW==0 else print('\033[1;32m' + "\n https://facecheck.id/")
         elif cho in ["pat","50"]: webbrowser.open("https://github.com/swisskyrepo/PayloadsAllTheThings"); print('\033[1;32m' + "\n Openning browser...") if tW==0 else print('\033[1;32m' + "\n https://github.com/swisskyrepo/PayloadsAllTheThings")
         elif cho in ["checkh","51"]:webbrowser.open("https://check-host.net/"); print('\033[1;32m' + "\n Openning browser...") if tW==0 else print('\033[1;32m' + "\n https://check-host.net/")
+        elif cho in ["censys","52"]: webbrowser.open("https://search.censys.io/"); print('\033[1;32m' + "\n Openning browser...") if tW==0 else print('\033[1;32m' + "\n https://search.censys.io/")
+        elif cho in ["pmail","53"]:webbrowser.open("https://www.phantom-mail.io/"); print('\033[1;32m' + "\n Openning browser...") if tW==0 else print('\033[1;32m' + "\n https://www.phantom-mail.io/")
         else:print(f"\n{bad} Command not found")
 
  ##########################################################################
-
 
 def CheckForUpdates():
   f=False
@@ -604,17 +632,19 @@ def main():
         # Imported modules from ./misc/modules/
         elif cho in ['pscan','p','0']: pscan.main() if InChck() else print("\033[1;31m\n No internet connection")
         elif cho in ['geoip','iplookup','iplook','ip' '1']: iplookup.IPLookUp() if InChck() else print("\033[1;31m\n No internet connection")
-        elif cho in ['mac','maclookup', '2']: maclookup.MacAddrLookUp() if InChck() else print("\033[1;31m\n No internet connection")
+        elif cho in ['macl','maclookup', '2']: maclookup.MacAddrLookUp() if InChck() else print("\033[1;31m\n No internet connection")
         elif cho in ['myip', '3']: getip.myip() if InChck() else print("\033[1;31m\n No internet connection")
         elif cho in ['aftp', '4']: anonftp.FTPanonLOG() if InChck() else print("\033[1;31m\n No internet connection")
         elif cho in ['mailscraper','mailscrape','m','5']: mailscrape.EmailScrape() if InChck() else print("\033[1;31m\n No internet connection")
         elif cho in ['chat', '6']: chat_submenu() if InChck() else print("\033[1;31m\n No internet connection")
         elif cho in ['pyobs', '7']: obs.Obs()
         elif cho in ['keylog', '8']: keylogger.Keylogger() if InChck() else print("\033[1;31m\n No internet connection")
+        elif cho in ['chmac','9']: changemac.main()
         # Functions from this file
         # Submenus
-        elif cho in ['webs', 'web','9']: webs_submenu() if InChck() else print("\033[1;31m\n No internet connection")
-        elif cho in ['hash','10']: hashing_submenu()
+        elif cho in ['webs', 'web','10']: webs_submenu() if InChck() else print("\033[1;31m\n No internet connection")
+        elif cho in ['hash','11']: hashing_submenu()
+        elif cho in ['mac', '12']: ChangeMacSubmenu()
         else:print(f"\n{bad} Command not found")
 
 
