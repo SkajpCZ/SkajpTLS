@@ -29,6 +29,7 @@ def main():
         except subprocess.CalledProcessError as e:print(f"{bad} Can't change mac on adapter {yellow}{interf}{white}: {red}{e}{white}")
         try:subprocess.run(['sudo', 'ip', 'link', 'set', 'up', interf],check=True);print(f"{good} Adapter {yellow}{interf}{white} is up");down=True
         except subprocess.CalledProcessError as e:print(f"{bad} Can't set up adapter {yellow}{interf}{white}: {red}{e}{white}")
+
 def reset():
     import subprocess
     ## Colors

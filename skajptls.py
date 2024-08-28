@@ -225,7 +225,7 @@ def helpsub_manual():
 
 def options_manual():
   values = [
-    ["Port Scanner", "pscan", "Just basic prot scanner"],
+    ["Port Scanner", "pscan", "Just basic port scanner"],
     ["IP Look Up", "iplook", "Basic ip look up"],
     ["Mac Look Up", "macl", "Basic mac address look up"],
     ["Your IPs", "myip", "Shows you your local and public ip"],
@@ -296,7 +296,7 @@ def webs_manual():
     ["Payload All Things",     "pat",           "Lot of payloads"],
     ["Check-host",             "checkh",        "IP resolver"],
     ["Censys",                 "censys",        "Find devices across the web"],
-    ["Phantom Mail",           "pmail",         "Temporary mail"]
+    ["Anon Box",               "abox",          "Temporary mail"]
   ]
   PrintTable(True,values,True)
 
@@ -531,7 +531,7 @@ def webs_submenu():
         elif cho in ["pat","50"]: webbrowser.open("https://github.com/swisskyrepo/PayloadsAllTheThings"); print('\033[1;32m' + "\n Openning browser...") if tW==0 else print('\033[1;32m' + "\n https://github.com/swisskyrepo/PayloadsAllTheThings")
         elif cho in ["checkh","51"]:webbrowser.open("https://check-host.net/"); print('\033[1;32m' + "\n Openning browser...") if tW==0 else print('\033[1;32m' + "\n https://check-host.net/")
         elif cho in ["censys","52"]: webbrowser.open("https://search.censys.io/"); print('\033[1;32m' + "\n Openning browser...") if tW==0 else print('\033[1;32m' + "\n https://search.censys.io/")
-        elif cho in ["pmail","53"]:webbrowser.open("https://www.phantom-mail.io/"); print('\033[1;32m' + "\n Openning browser...") if tW==0 else print('\033[1;32m' + "\n https://www.phantom-mail.io/")
+        elif cho in ["abox","53"]:webbrowser.open("https://anonbox.net/"); print('\033[1;32m' + "\n Openning browser...") if tW==0 else print('\033[1;32m' + "\n https://anonbox.net/")
         else:print(f"\n{bad} Command not found")
 
  ##########################################################################
@@ -631,7 +631,7 @@ def main():
         elif cho in ["exec", "e"]: os.system(fullcho[5:]) if cho == "exec" else os.system(fullcho[2:])
         # Imported modules from ./misc/modules/
         elif cho in ['pscan','p','0']: pscan.main() if InChck() else print("\033[1;31m\n No internet connection")
-        elif cho in ['geoip','iplookup','iplook','ip' '1']: iplookup.IPLookUp() if InChck() else print("\033[1;31m\n No internet connection")
+        elif cho in ['geoip','iplookup','iplook','ip','1']: iplookup.IPLookUp() if InChck() else print("\033[1;31m\n No internet connection")
         elif cho in ['macl','maclookup', '2']: maclookup.MacAddrLookUp() if InChck() else print("\033[1;31m\n No internet connection")
         elif cho in ['myip', '3']: getip.myip() if InChck() else print("\033[1;31m\n No internet connection")
         elif cho in ['aftp', '4']: anonftp.FTPanonLOG() if InChck() else print("\033[1;31m\n No internet connection")
@@ -660,7 +660,7 @@ def FirstStart():
     print(f"{status} Installing{grey}:{white} {i}        ", end="\r")
     subprocess.call(f"pip install {i} >nul", shell=True, stdout=FNULL, stderr=subprocess.STDOUT) if os.name == 'nt' else subprocess.call(f"pip install {i} --break-system-package", shell=True, stdout=FNULL, stderr=subprocess.STDOUT) if GetPipVer() >= 23.0 else subprocess.call(f"pip install {i}", shell=True, stdout=FNULL, stderr=subprocess.STDOUT)
     print(f"{good} Installed{grey}:{white} {i}         ")
-  
+
   os.mkdir('./misc/chats')
   os.mkdir('./misc/keylogger')
   os.mkdir('./misc/keylogger/clients')
